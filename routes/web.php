@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\JobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/  	
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,20 +21,26 @@ Route::get('/dash', function () {
     return view('dash');
 });
 
-Route::get('/viewlogs', function () {
-    
-	return view('viewlogs');
-});
+Route::get('/viewlogs', [JobController::class, 'ShowJobs']) ;
+
+/*
+Route::get('/createlog', [JobController::class, 'CreateLog']) ;
+*/
 
 Route::get('/createlog', function () {
-    
 	return view('createlog');
 });
 
+Route::post("savelog",[JobController::class, 'SaveLog']);
+
 Route::get('/installer', function () {
-    
 	return view('installer');
 });
+
+Route::get('/installer', function () {
+    return view('installer');
+});
+
 /*
 Route::get('/installer', function () {
     return 'Hello World';

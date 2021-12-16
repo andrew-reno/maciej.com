@@ -3,7 +3,7 @@
 	width: 100%;
 	box-sizing: border-box;
 	max-width: 1920px;
-	border: 1px solid white;
+ 
 	height: auto;
 	min-height: 600px;
 	padding: 1em;
@@ -64,7 +64,7 @@ h3
 
 select option{
 	
-background-color: #eee;
+	background-color: #eee;
     color: black;
 }
 input.themeButton
@@ -183,15 +183,11 @@ table th {
     
 }
 
- table td
+table td
 {
-	
 	font-size: 1em;
-    border-right: 1px solid #eee;
-    vertical-align: text-top;
-    font-weight: normal;
-    text-align: left;
-    white-space: nowrap;
+	vertical-align: text-top;
+	font-weight: normal;
+	text-align: left;
     overflow: hidden;
-	
 }

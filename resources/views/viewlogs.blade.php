@@ -26,5 +26,51 @@
         	<a aria-lable="Create a new log" class="themeButton" href="createlog" >CREATE</a>   <a aria-lable="View all logs" class="themeButton" href="viewlogs">VIEW LOGS</a>
         </div>
         
+      <?php
+      	
+      	use App\Http\Controllers\JobController;
+      	 $foo = new JobController;
+      	//JobController::JobStatus($j->status)
+      	
+	      $obuff =" 
+	      <div class=\"container\">
+	      <!-- BEGIN LOG TABLE -->
+			<table style=\"table-layout: fixed; width: 100%; border-collapse: collapse;margin: 1em 0em;\">
+			  <tr>
+			    <th>ID</th>
+			    <th>Status</th>
+			    <th>Summary</th>
+			    <th>Description</th>
+			    <th>Property</th>
+			     <th>Raised By <!-- Manager --></th>
+			  </tr>";
+
+ 
+			// Property name is an address ?	
+			foreach($jobs as $j)
+			{
+					 
+	 			 $addr = json_decode($j->name);
+	 		  	 
+	 			 if(json_last_error() == JSON_ERROR_NONE )
+					$obuff .=  
+					"<tr>
+						<td>".$j->id."</td>
+						<td>".$foo->JobStatus($j->status)."</td>
+						<td>".$j->summary."</td>
+						<td>".$j->description."</td>
+						<td>".$addr->Line1.",... ".$addr->Postcode."</td>
+						<td>".$j->manager."</td>
+					</tr>";
+				
+			}	
+			 
+			
+			$obuff .= "</table><!-- END LOG TABLE --> </div>";
+
+		echo $obuff ;
+ 	 	
+      ?>
+      
     </body>
 </html>
