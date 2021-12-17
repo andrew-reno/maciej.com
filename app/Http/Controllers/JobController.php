@@ -48,7 +48,7 @@ class JobController extends Controller
 		
 		// Status 0 Closed | Status 1 = 0pen | Status 2 Complete | Status 3 Danger / Urgent
 		// Insert new record to Job table
-		$data['status'] = DB::table('job')->insertOrIgnore([
+		$data['status'] = DB::table('jobs')->insertOrIgnore([
 			 	[	
 			 	'id' 					=> $request->input('id'),
 			 	'summary' 				=> $request->input('schedule_id'), 
@@ -102,53 +102,7 @@ class JobController extends Controller
  		return $b;
 	}
 	
-	public function ViewLogTemplate()
-	{
-		$query = "SELECT * FROM ".DB_NAME_1.".".DB_TABLE_1." 
-					JOIN .".DB_TABLE_2." p ON p.id =  ".DB_TABLE_1.".property_id 
-					ORDER BY ".DB_TABLE_1.".id  ASC ";
-		 
-		// echo $query;
-
-		$result = $this->mysqli->query($query);
-		
-		if($result->num_rows < 1)
-		  return  "NO DB LOG RECORDS ".$query." MYSQLI ERROR " .$this->mysqli->error ;
-		 
-		 
- 		$obuff = NULL;
- 
-		$obuff =" <!-- BEGIN LOG TABLE -->
-		<table style=\"width: 100%; border-collapse: collapse;margin: 1em 0em;\">
-		  <tr>
-		    <th>ID</th>
-		    <th>Status</th>
-		    <th>Summary</th>
-		    <th>Description</th>
-		    <th>Property</th>
-		     <th>Raised By <!-- Manager --></th>
-		  </tr>";
-
-		// Property name is an address ?	
-		while($obj = $result->fetch_object())
-		{
- 			 $addr = json_decode($obj->name);
- 			 if(json_last_error() == JSON_ERROR_NONE )
-				$obuff .=  
-				"<tr>
-					<td>".$obj->id."</td>
-					<td>".$this->JobStatus($obj->status)."</td>
-					<td>".$obj->summary."</td>
-					<td>".$obj->description."</td>
-					<td>".$addr->Line1.",... ".$addr->Postcode."</td>
-					<td>".$obj->manager."</td>
-				</tr>";
-		}	
-		 
-		$obuff .= "</table><!-- END LOG TABLE -->";
-
-		return $obuff. $this->DebugShow("Query  = $query | No rows = ".$result->num_rows." | Json error = ".json_last_error());
-	}
+	 
 	
 	private function DebugShow($str)
 	{
@@ -185,10 +139,18 @@ class JobController extends Controller
 	
 	public function ShowJobs()
 	{
+        //DB::enableQueryLog(); // Enable query log
 	 
 		$jobs = DB::table('jobs')
-        ->join('property', 'property.id', '=', 'jobs.property_id')
+        ->join('properties', 'properties.id', '=', 'jobs.property_id')
         ->get();
+        
+
+		// Your Eloquent query executed by using get()
+		//dd(DB::getQueryLog()); // Show results of log
+	
+		//exit();
+	
         return view('viewlogs')->with('jobs', $jobs);
 	}
 	
@@ -233,8 +195,8 @@ class JobController extends Controller
 			 	'property_id' 		=> $r->property, 
 			 	'summary' 			=> $r->summary, 
 			 	'description' 		=> $r->description,
-			 	'status' 			=> "1",  
-			 	'time_stamp' 		=> 'NULL'
+			 	'status' 			=> "1"  
+			 
 				]
 			]);
 			

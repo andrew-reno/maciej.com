@@ -15,7 +15,12 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('description');
+            $table->string('summary');
+            $table->integer('status');
+            $table->integer('property_id');
+            
         });
     }
 

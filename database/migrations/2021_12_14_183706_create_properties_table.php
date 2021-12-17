@@ -15,7 +15,10 @@ class CreatePropertiesTable extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('name',255);
+          	$table->string('manager');
+          	$table->string('geolocation');
         });
     }
 

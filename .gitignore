@@ -4,6 +4,9 @@
 /storage/*.key
 /vendor
 
+elogbooks.com.clpprj
+elogbooks.com_clcs.csprj
+
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json

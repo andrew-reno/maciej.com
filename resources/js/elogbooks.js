@@ -59,4 +59,25 @@ $(document).ready(function()
 			$(".status").removeClass("success_msg");
 		}
 		
+	var yourself = {
+	    fibonacci : function(n)
+	    {
+	        if (n === 0) {
+	        	console.log(n)
+	            return 0;
+	        } else if (n === 1) {
+	        		console.log(n)
+	            return 1;
+	        } 
+	        
+            return this.fibonacci(n - 1) +
+                this.fibonacci(n - 2);
+	        
+	    }
+	};
+	
+	 
+	console.log(yourself.fibonacci(5))
+	 
+		
 } ); // End doc ready
