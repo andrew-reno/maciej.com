@@ -21,6 +21,8 @@
             }
         </style>
     </head>
+    <div class="logo"></div>
+    <h1>View Logs</h1>
     <body class="antialiased">
         <div style="padding: 1em;text-align: center;display: inline-block;width: 100%;"> 
         	<a aria-lable="Create a new log" class="themeButton" href="createlog" >CREATE</a>   <a aria-lable="View all logs" class="themeButton" href="viewlogs">VIEW LOGS</a>
@@ -28,21 +30,20 @@
         
       <?php
       	
-      	use App\Http\Controllers\JobController;
+      	 use App\Http\Controllers\JobController;
       	 $foo = new JobController;
-      	//JobController::JobStatus($j->status)
-      	
+       
 	      $obuff =" 
 	      <div class=\"container\">
 	      <!-- BEGIN LOG TABLE -->
-			<table style=\"table-layout: fixed; width: 100%; border-collapse: collapse;margin: 1em 0em;\">
+			<table class=\"sorted\" style=\"width: 100%; border-collapse: collapse;margin: 1em 0em;\">
 			  <tr>
-			    <th>ID</th>
-			    <th>Status</th>
-			    <th>Summary</th>
-			    <th>Description</th>
-			    <th>Property</th>
-			     <th>Raised By <!-- Manager --></th>
+			    <th class=\"sortable\">ID</th>
+			    <th class=\"sortable\">Status</th>
+			    <th class=\"sortable\">Summary</th>
+			    <th class=\"sortable\">Description</th>
+			    <th class=\"sortable\">Property</th>
+			    <th class=\"sortable\">Raised By <!-- Manager --></th>
 			  </tr>";
 
  
@@ -73,4 +74,5 @@
       ?>
       
     </body>
+    @include('partials.footer_scripts') 
 </html>

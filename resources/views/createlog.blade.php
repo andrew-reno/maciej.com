@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>eLogbooks - createlog.blade</title>
+        <title>eLogbooks - Createlog.blade</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -22,17 +22,21 @@
             }
         </style>
     </head>
+   
     <body class="antialiased">
-    <div class="status"></div>
-        <div style="padding: 1em;text-align: center;display: inline-block;width: 100%;"> 
-        	<a aria-lable="Create a new log" class="themeButton" href="createlog" >CREATE</a>   <a aria-lable="View all logs" class="themeButton" href="viewlogs">VIEW LOGS</a>
-        </div>
+	<div class="logo"></div>
+		<h1>Create Logs</h1>
+		<div class="status"></div>
+		<div style="padding: 1em;text-align: center;display: inline-block;width: 100%;"> 
+			<a aria-lable="Create a new log" class="themeButton" href="createlog" >CREATE</a>   <a aria-lable="View all logs" class="themeButton" href="viewlogs">VIEW LOGS</a>
+		</div>
+         
         	 <div class="mini_container">
 					<!-- BEGIN CREATE LOG VIEW -->
 			 		<form action="savelog" method="POST" enctype="multipart/form-data" action="rsvp">
 						{{ method_field('POST') }}
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<h2>New Job: </h2> 
+						
 						<input type="hidden" name="form_purpose" value="create_new_log">
 						
 						<div class="formCtrls">
@@ -63,17 +67,7 @@
 			 <!-- END CREATE LOG VIEW  --></div> 
    
     </body>
-     
-     <!-- /* 
-     blade partial ...
-	    */ 
-    	-->
-   
-	  <footer>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-			<script src="../resources/js/elogbooks.js?v=<?php echo getenv('APP_VERSION') ; ?>"> </script>
-			<meta name="web-app-version" content="<?php getenv('APP_VERSION')  ?>">
-	</footer>
+      @include('partials.footer_scripts') 
 </html>
 
  

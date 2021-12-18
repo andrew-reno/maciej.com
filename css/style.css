@@ -1,3 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); 
+
+body
+{
+	 
+	 background-color: rgb(31, 159, 138); 
+	 font-family: 'Roboto', sans-serif;
+}
 .container, .table_container
 {
 	width: 100%;
@@ -7,19 +16,23 @@
 	height: auto;
 	min-height: 600px;
 	padding: 1em;
+	
 
 }
+
 .table_container{
 	 overflow-x:auto; 
 	 border: none;
 	 min-height: auto;
 }
+
 .mini_container
 {
 	width: 50%;
 	text-align: center;
 	margin: 0 auto;
 }
+
 .formCtrls
 {
 	width: 100%;
@@ -42,11 +55,14 @@ h1, h2, h3
 	text-align: center;
 	background-color: unset;
 	padding: 0.25em 0em;
+	
 }
+
 h2
 {
 	font-size: 1.1em;
 }
+
 h3
 {
 	font-size: 1.0em;
@@ -54,8 +70,7 @@ h3
 
 .themeButton, .submitButton, select 
 {
-	padding: 0.5em;
-	width: 50%;
+	padding: 0.25em 0.55em;
 	background-color: rgb(214, 111, 11);
 	color: white;
 	text-transform: uppercase;
@@ -67,19 +82,19 @@ select option{
 	background-color: #eee;
     color: black;
 }
+
 input.themeButton
 {
 	width: 100%;
 }
+
 label
 {
 	color: white;
 	float: left;
 }
-body
-{
-	background-color: rgb(31, 159, 138)
-}
+
+
 
 .loader
 {
@@ -96,8 +111,6 @@ body
 	margin: 0 auto;
 	padding: 0.5em;
 	margin-top: 1em;
-
-
 }
 
 @keyframes spin
@@ -161,6 +174,7 @@ table tr:nth-child(even)
 {
 	background-color: white ;
 }
+
 table tr:nth-child(odd)
 {
 	background-color: #eee;
@@ -179,8 +193,8 @@ table th {
     vertical-align: top;
     text-align: left;
     text-transform: uppercase;
-    width: 30px;
-    
+    width: auto;
+    overflow: hidden;    
 }
 
 table td
@@ -190,4 +204,36 @@ table td
 	font-weight: normal;
 	text-align: left;
     overflow: hidden;
+}
+
+.sortable{
+	cursor: pointer;
+}
+
+.sortable:after{
+	float: right;
+	background-color: transparent;
+	opacity: 0.7; 
+	content: " "; 
+	background-image: url(../icons/sort_24_white.png?v=3);
+	width:20px;
+	height:23px;
+}
+
+@media only screen and (max-width :  480px)
+{
+	.container{min-width: 410px}
+	
+	table th
+	{
+		font-size: 0.9em;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+
+.logo{
+	background-image: url(https://32a8uf21bv9y2zeceg1suvz1-wpengine.netdna-ssl.com/wp-content/uploads/2021/10/Elogbooks-SRC-logo-web.png);
+    width: 403px;
+    height: 108px;
 }

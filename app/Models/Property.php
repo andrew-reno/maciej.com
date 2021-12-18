@@ -12,7 +12,8 @@ class Property extends Model
     protected $fillable = [
         'name',
         'manager',
-        'geolocation'
+        'geolocation',
+        'time_stamp'
     ];
     
 }

@@ -5,12 +5,16 @@ $(document).ready(function()
 		{
 
 				e.preventDefault();
+ 
+			 			
 				GUI_Status_Busy();
+
+
 				$(window).scrollTop(0);
 				
+				 
 				$.ajax(
 					{
-						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						url: "savelog", 
 						data: $('input[name="save"]').closest("form").serialize() ,
 						dataType: 'JSON',  // what to expect back from the PHP script, if anything
@@ -58,26 +62,20 @@ $(document).ready(function()
 			$(".status").removeClass("error_msg");
 			$(".status").removeClass("success_msg");
 		}
-		
-	var yourself = {
-	    fibonacci : function(n)
-	    {
-	        if (n === 0) {
-	        	console.log(n)
-	            return 0;
-	        } else if (n === 1) {
-	        		console.log(n)
-	            return 1;
-	        } 
-	        
-            return this.fibonacci(n - 1) +
-                this.fibonacci(n - 2);
-	        
-	    }
-	};
-	
-	 
-	console.log(yourself.fibonacci(5))
-	 
-		
+ 
+		const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+		const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+			v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+		)(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+		// sorted tables
+		document.querySelectorAll('table.sorted th').forEach(th => th.addEventListener('click', (() => {
+			// $(".status").addClass("loader")
+			const table = th.closest('table.sorted');
+			Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
+			.sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+			.forEach(tr => table.appendChild(tr) );
+
+		})));
 } ); // End doc ready
