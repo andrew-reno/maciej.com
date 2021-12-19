@@ -23,10 +23,6 @@ Route::get('/dash', function () {
 
 Route::get('/viewlogs', [JobController::class, 'ShowJobs']) ;
 
-/*
-Route::get('/createlog', [JobController::class, 'CreateLog']) ;
-*/
-
 Route::get('/createlog', function () {
 	return view('createlog');
 });
@@ -40,9 +36,3 @@ Route::get('/installer', function () {
 Route::get('/installer', function () {
     return view('installer');
 });
-
-/*
-Route::get('/installer', function () {
-    return 'Hello World';
-});
-*/

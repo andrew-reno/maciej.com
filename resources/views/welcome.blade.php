@@ -37,7 +37,7 @@
 
 				<a href="{{ url('/dash') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> |
 				<a href="{{ url('viewlogs') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">View logs</a> | 
-				<a href="{{ url('createlogs') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Create logs</a> |
+				<a href="{{ url('createlog') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Create logs</a> |
 			</div>
 
 			<div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
