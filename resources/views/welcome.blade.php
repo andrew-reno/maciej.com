@@ -19,16 +19,9 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
-			<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-			<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>  
-			<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-			<script type="text/babel">  
-				ReactDOM.render(
-				<h1>Home - Laravel</h1>,
-				document.getElementById('react_js')
-			);
-        </script>
+ 
     </head>
+    <h1>Home - Laravel</h1> 
     <body class="antialiased">
     <span id="react_js"></span>
 		<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -36,8 +29,11 @@
 			<div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
 
 				<a href="{{ url('/dash') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a> |
+				 |
 				<a href="{{ url('viewlogs') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">View logs</a> | 
+				<a href="{{ url('fetchlogs') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">View logs (Vue.JS)</a> | 
 				<a href="{{ url('createlog') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Create logs</a> |
+				<a href="{{ url('createlogvue') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Create logs (Vue.JS)</a> |
 			</div>
 
 			<div class="max-w-6xl mx-auto sm:px-6 lg:px-8">

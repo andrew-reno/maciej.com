@@ -17,7 +17,7 @@ class Job extends Model
 		'summary',
 		'description',
 		'property_id',
-		 'time_stamp' 
+		'time_stamp' 
     ];
     
     public function Foo1()

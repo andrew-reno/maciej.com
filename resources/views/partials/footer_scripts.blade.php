@@ -1,5 +1,7 @@
 <footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="<?php echo getenv('APP_URL'); ?>/resources/js/elogbooks.js?v=<?php echo getenv('APP_VERSION'); ?>"></script>
-	<meta name="web-app-version" content="<?php echo getenv('APP_VERSION'); ?>">
+	
+ 	<meta name="web-app-version" content="<?php echo getenv('APP_VERSION'); ?>">
+ 	 <meta name="ajax_io" content="<?php echo getenv('AJAX_IO'); ?>">
 </footer> 
