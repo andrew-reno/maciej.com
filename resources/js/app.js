@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(event) 
 { 
- window.onerror = function(message, source, line, column, error) {
-  console.log('ONE ERROR HANDLER TO RULE THEM ALL:', message);
-}
-
 	const app = new Vue({
 	  el:'#appLB',
 	  data:{
@@ -46,19 +42,14 @@ document.addEventListener("DOMContentLoaded", function(event)
 				
 				/* Need to add a meta field for visual date and sortable date in usa format 
 	 				
-	 			 var d = new Date(this.jobs[i].time_stamp)  
+	 			var d = new Date(this.jobs[i].time_stamp)  
 	 			this.jobs[i].time_stamp =  ('0' + (d.getDate()+1)).slice(-2)  + "/";
 	 			this.jobs[i].time_stamp += ('0' + (d.getMonth()+1)).slice(-2) + "/" + d.getFullYear() + " ";
 	 			this.jobs[i].time_stamp += d.getHours() +":"+d.getMinutes();
-	 			 */	   
+	 			*/	   
 	 				
 			}
-	 		
-	 		
-	 	
-		  	//for(i = 0; i < this.jobs.length; i++)
-		   	// this.jobs[i].time_stamp  = Math.round(+new Date()/1000);// unix timestamp
-			 
+	 
 	     });
 	    
 	  },
@@ -88,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function(event)
 	    filteredLogs() {    
 	      return this.jobs.filter(c => {
 	        if(this.filter == '') return true;
-	         return c.summary.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0 || c.description.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0 || c.name.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0  || c.manager.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0 ; 
+	         return c.summary.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0 || c.description.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0 || c.name.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0  || c.manager.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0  || c.time_stamp.toLowerCase().indexOf(this.filter.toLowerCase())  >= 0; 
 	      })
 	    },
 	    
@@ -108,25 +99,5 @@ document.addEventListener("DOMContentLoaded", function(event)
 	    
 	  }
 	})// End vue
-	
-	 /*
-	 	import Vue from 'vue'; 
-
-		Vue.config.errorHandler = (err, vm, info) => {
-		// err: error trace
-		// vm: component in which error occured
-		// info: Vue specific error information such as lifecycle hooks, events etc.
-				console.log(err, vm, info)
-		// TODO: Perform any custom logic or log to server
-
-		};
-		
-		window.onerror = function(message, source, lineno, colno, error) {
-	  	// TODO: write any custom logic or logs the error
-	  	console.log(message, source, lineno, colno, error)
-	};
-	*/
-	
  
-
 });// End ready

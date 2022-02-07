@@ -1,6 +1,3 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); 
-
 /*
 
 Elogbooks.com 
@@ -8,24 +5,28 @@ Elogbooks.com
 Branding / Theme
 
 Green: rgb(31, 159, 138)
+Darker green: rgb(20 94 83)
 Orange: rgb(214, 111, 11)
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'); 
+ 
 body
 { 
  background-color: rgb(31, 159, 138); 
- font-family: 'Roboto', sans-serif;
+ font-family: 'Nunito', sans-serif;
 }
+
+a{text-decoration: none;}
+
 .container, .table_container
 {
 	width: 100%;
 	box-sizing: border-box;
 	max-width: 1920px;
- 
 	height: auto;
 	min-height: 600px;
 	padding: 1em;
-	
-
 }
 
 .table_container{
@@ -41,7 +42,7 @@ body
 	margin: 0 auto;
 }
 
-.formCtrls
+.formCtrls, .formCtrlsMini
 {
 	width: 100%;
 	box-sizing: border-box;
@@ -52,13 +53,13 @@ body
 
 .formCtrls input, .formCtrls select {
     width: 100%;
- 
 }
-
+.formCtrlsMini{
+	width:50%;
+}
 textarea, input
 {
 	width: 100%;
-
 }
 
 h1, h2, h3
@@ -69,7 +70,6 @@ h1, h2, h3
 	text-align: center;
 	background-color: unset;
 	padding: 0.25em 0em;
-	
 }
 
 h2
@@ -85,14 +85,14 @@ h3
 .themeButton, .submitButton, select 
 {
 	padding: 0.25em 0.55em;
-	background-color: rgb(214, 111, 11);
+	background-color: rgb(20 94 83);
 	color: white;
 	text-transform: uppercase;
-	font-size: larger
+	font-size: larger;
+	border: 1px solid rgb(214, 111, 11);
 }
 
 select option{
-	
 	background-color: #eee;
     color: black;
 }
@@ -106,10 +106,9 @@ label
 {
 	color: white;
 	float: left;
+	font-size: 1em;
 }
-
-
-
+ 
 .loader
 {
 	border: 16px solid #f3f3f3; /* Light grey */
@@ -178,9 +177,12 @@ label
 	border: 1px solid green;
 }
 
+table{
+	border-spacing: 0px;
+	border: 1px solid  rgb(214, 111, 11);
+}
 table tr
-{
-	color: #444;
+{ 
 	width: 30px;
 }
 
@@ -195,20 +197,19 @@ table tr:nth-child(odd)
 }
 
 table tr:nth-child(odd).clicked,
-table tr:nth-child(even).clicked {
-      background-color: cornsilk !important;
-}
+table tr:nth-child(even).clicked {background-color: cornsilk !important;}
 
 table th {
     color: white;
-    background-color: #444;
+    background-color: rgb(20 94 83);
     padding: 0.5em 0.5em;
     font-size: 1em;
     vertical-align: top;
     text-align: left;
     text-transform: uppercase;
     width: auto;
-    overflow: hidden;    
+    overflow: hidden; 
+    border-spacing: 0px   
 }
 
 table td
@@ -218,12 +219,21 @@ table td
 	font-weight: normal;
 	text-align: left;
     overflow: hidden;
+    padding: 4px;
 }
 
 .sortable{
 	cursor: pointer;
 }
 
+#search{
+	width: 450px;
+	padding: 0.5em;
+}
+
+.darkTheme{
+	background-color: #444;padding: 1em;
+}
 .sortable:after {
     content: " ";
     background-image: url(../icons/sort_both.svg?v=1);
@@ -235,19 +245,6 @@ table td
 }
 
 .sortable_flip:after{background-position: 0px -7px;}
-
-@media only screen and (max-width :  480px)
-{
-	.container{min-width: 410px}
-	
-	table th
-	{
-		font-size: 0.9em;
-		white-space: nowrap;
-		overflow: hidden;
-	}
-}
-
 .logo {
     background-image: url(https://32a8uf21bv9y2zeceg1suvz1-wpengine.netdna-ssl.com/wp-content/uploads/2021/10/Elogbooks-SRC-logo-web.png);
     width: 100%;
@@ -257,9 +254,30 @@ table td
     background-repeat: no-repeat;
     background-color: white;
 }
-
+ 
+@media only screen and (max-width :  1080px)
+{
+	.container{min-width: 410px}
+	.formCtrlsMini{
+		width: 100%;
+	}
+	table th
+	{
+		font-size: 0.9em;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+@media only screen and (max-width :  540px)
+{
+	#search{
+		width:100% ;
+	}
+	.logo{
+	 	background-position: 50px 20px;
+	}
+}
 
 #response{text-align: center;}
- 
 #app{opacity: 0;}
  
