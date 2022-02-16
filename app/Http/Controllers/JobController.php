@@ -8,29 +8,23 @@ use App\Models\Property;
 use App\Controller\PropertyController;
 use Illuminate\Support\Facades\DB;
  
-class JobController extends Controller
-{
-     	
+class JobController extends Controller{	
     public  $id, $summary, $description, $status;
-	
 	public  $property; // Type property
 	
-	public function __construct()
-	{
+	public function __construct(){
 		$this->id 		= NULL;
 		$this->property = new Property;
 	}
  
  	// Create a new job/log
-	public function NewLog()
-	{
+	public function NewLog(){
 		$required 	= array('property','summary', 'description');
 		 
 		// Loop over field names, make sure each one exists and is not empty
-		foreach($required as $field) 
-		{
+		foreach($required as $field){
 			
-			if (empty( $this->SanitiseInput($_POST[$field]) ) ) 
+			if (empty($this->SanitiseInput($_POST[$field])) ) 
 			{
 				$error = true;
 				if( $missing )
@@ -39,8 +33,7 @@ class JobController extends Controller
 			}
 		}
 
-		if($error) 
-		{
+		if($error) {
 			$data['error'] = 1;
 			$data['msg'] = "All fields are required. Missing: ". ucwords($missing);
 			return $data; 
@@ -64,16 +57,70 @@ class JobController extends Controller
  
 	public function NewLogTemplate(){}
 	
-	private function DebugShow($str)
-	{
+	private function DebugShow($str){
 		if(DEBUG_MODE )
 			echo $str;
 	}
 	
+	public function EditLog($id){
+		 $job  = DB::table('jobs')->where('id', '=', $id)->get();
+        return view('editlog')->with('job', $job ); 
+	}
+	
+	public function UpdateLog(Request $r){
+		
+		if($_SERVER['REMOTE_ADDR'] != "95.145.61.181")
+		{
+			 
+			$data['error'] = 1;
+			$data['msg'] = "Unauthorised IP. Todo scaffold auth. Denied: ".$_SERVER['REMOTE_ADDR'] ;
+			return $data; 
+		  
+		}
+		$required 		= array('summary', 'description');
+		$missing 		= NULL;
+		$error 			= NULL;
+		$data['status'] = 0;
+		
+		// Loop over field names, make sure each one exists and is not empty
+		foreach($required as $field){
+			if (empty( $this->SanitiseInput($_POST[$field]))){
+				$error = true;
+				if( $missing )
+					$missing .= ", ";
+				$missing .= $field; 
+			}
+		}
+
+		if($error){
+			$data['error'] = 1;
+			$data['msg'] = "All fields are required. Missing: ". ucwords($missing);
+			return $data; 
+		}  
+		
+		try{
+			 
+			$data['status'] =  DB::table('jobs')->where('id', $r->id)->update([
+						'summary' 			=> $r->summary, 
+            		  	'description' 		=> $r->description]);
+                
+		 
+			if($data['status']  == 1)
+			 $data['msg'] = "Data saved!"  ;
+ 	 
+		}catch(\Illuminate\Database\QueryException $e){
+			$data['status'] = 0;
+			$data['error'] 	= 1;
+			$data['msg'] 	= $e->getMessage();
+			return $data;
+		}
+		
+		return $data;
+	}
+	
 	// Access needed in view or make duplicate or make more complicated  ...
-	public function JobStatus($int)
-	{
-		switch($int)
+	public function JobStatus($state){
+		switch($state)
 		{	case "0":
 				return "Closed";
 			break;
@@ -89,56 +136,41 @@ class JobController extends Controller
 		}
 	}
 	
-	private function SanitiseInput($str)
-	{
+	private function SanitiseInput($str){
 		$str = trim($str);
 		//$str = $this->mysqli->real_escape_string($str);
 		$str = htmlentities($str);
 		return $str;
 	}
 	
-	public function ShowJobs()
-	{
+	public function ShowJobs(){
         //DB::enableQueryLog(); // Enable query log
-	 
 		$jobs = DB::table('jobs')
         ->join('properties', 'properties.id', '=', 'jobs.property_id')
         ->get();
         
-	
         return view('viewlogs')->with('jobs', $jobs);
 	}
 	
-	public function FetchLogs()
-	{
- 
-		$jobs = DB::table('jobs')
-        ->join('properties', 'properties.id', '=', 'jobs.property_id')
-        ->get();
-       
-       return $jobs;
-          
+	public function FetchLogs(){
+		return DB::table('jobs')
+        ->join('properties as p', 'p.id', '=', 'jobs.property_id')
+        ->get(['jobs.id as id',  'summary','description', 'status', 'property_id', 'time_stamp', 'name', 'manager']);     
 	}
 	
-	public function CreateLog()
-	{
-	 
-		 return view('createlogs')->with('jobs', $jobs);
+	public function CreateLog(){
+	  return view('createlogs')->with('jobs', $jobs);
 	}
 	
-	public function SaveLog(Request $r)
-	{
-		 
+	public function SaveLog(Request $r){
   		$required 		= array('property','summary', 'description');
 		$missing 		= NULL;
 		$error 			= NULL;
 		$data['status'] = 0;
 		
 		// Loop over field names, make sure each one exists and is not empty
-		foreach($required as $field) 
-		{
-			if (empty( $this->SanitiseInput($_POST[$field]) ) ) 
-			{
+		foreach($required as $field){
+			if (empty( $this->SanitiseInput($_POST[$field]))){
 				$error = true;
 				if( $missing )
 					$missing .= ", ";
@@ -146,15 +178,13 @@ class JobController extends Controller
 			}
 		}
 
-		if($error) 
-		{
+		if($error){
 			$data['error'] = 1;
 			$data['msg'] = "All fields are required. Missing: ". ucwords($missing);
 			return $data; 
 		}  
 		
-		try 
-		{
+		try{
 			 
 			$data['status'] = DB::table('jobs')->insertOrIgnore([
 			 	[	
@@ -170,8 +200,7 @@ class JobController extends Controller
 			 $data['msg'] = "Data saved!"  ;
  	 
 		}
-		catch(\Illuminate\Database\QueryException $e)
-		{
+		catch(\Illuminate\Database\QueryException $e){
 			$data['status'] = 0;
 			$data['error'] 	= 1;
 			$data['msg'] 	= $e->getMessage();
@@ -180,8 +209,4 @@ class JobController extends Controller
 		
 		return $data;
 	}
-	
-	
-	  
-	
 }

@@ -7,17 +7,17 @@
 		<link rel="stylesheet"   href="css/style.css">	
     </head>
     <body class="antialiased">
-	<div class="logo"></div>
-		<h1>Create Logs</h1>
+	<a href="dash"><div class="logo"></div></a>
 		<div class="status"></div>
+		<h1>Create Logs</h1>
 		 @include('partials.nav')
 		   <!-- MIDWAY NAV END -->
         	 <div class="mini_container">
 					<!-- BEGIN CREATE LOG VIEW -->
-			 		<form action="savelog" method="POST" enctype="multipart/form-data" action="rsvp">
+			 		<form action="savelog" method="POST" enctype="multipart/form-data">
 						{{ method_field('POST') }}
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="hidden" name="form_purpose" value="create_new_log">
+						<input type="hidden" name="form_purpose" value="<?php echo getenv('APP_URL'); ?>/savelog">
 						<div class="formCtrls">
 							<label  for="active">Properties:</label>
 							<div style="padding:0em 0em 1em 0em">

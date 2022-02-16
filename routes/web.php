@@ -11,13 +11,13 @@ use App\Http\Controllers\JobController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/  	
+*/ 
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
 });
-
-Route::get('/dash', function () {
+ 	
+Route::get('/dash', function() {
     return view('dash');
 });
 
@@ -29,13 +29,14 @@ Route::get('/fetchlogs', function () {
 	return view('fetchlogs');
 });
 
-// Vue.js NON blade view
+/* Vue.js NON blade view
 Route::get('/fetchlog', function () {
 	return view('fetchlog');
 });
+*/
 
 // Vue.js ajax
-Route::get('/vfetchlogs', [JobController::class, 'FetchLogs']) ;
+Route::get('/vfetchlogs', [JobController::class, 'FetchLogs']);
 
 Route::get('/createlog', function () {
 	return view('createlog');
@@ -43,12 +44,14 @@ Route::get('/createlog', function () {
 
 Route::post("savelog",[JobController::class, 'SaveLog']);
 
+Route::get('/editlog/{id}', [JobController::class, 'EditLog']);
+
+Route::patch('/patchlog', [JobController::class, 'UpdateLog']);
+
 Route::get('/installer', function () {
 	return view('installer');
 });
-
-Route::get('/installer', function () {
-    return view('installer');
-});
+ 
+ 
 
  

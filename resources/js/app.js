@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function(event)
 	    prevPage:function() {
 	      if(this.currentPage > 1) this.currentPage--;
 	    }
+	   
 	  },
 	  watch: {
 	    filter() {
@@ -95,7 +96,9 @@ document.addEventListener("DOMContentLoaded", function(event)
 	        let end = this.currentPage*this.pageSize;
 	        if(index >= start && index < end) return true;
 	      });
-	    } 
+ 
+	    }
+	   
 	    
 	  }
 	})// End vue
